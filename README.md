@@ -8,9 +8,10 @@ Reads in:
 Sample output:  
 ![](http://i.imgur.com/Pk3WK6p.png)
 
-Requires:  
+Needs:  
 * python
 * [python-requests](http://docs.python-requests.org/en/latest/)
 * pandoc
+* LaTeX engine
 
 Tested on Windows.
