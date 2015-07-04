@@ -49,7 +49,7 @@ print(str(num_lines)+' items total')
 count=0
 
 with open(filename+'.md','w') as f:
-	f.write('`{'+URL+'}`\n\n')
+	f.write('`'+URL+'`\n\n')
 
 
 with open('results.txt') as file_:
