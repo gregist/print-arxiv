@@ -5,6 +5,11 @@ import re
 import os
 import sys
 
+def urlify(s):
+	s = re.sub(r"[^\w\s]", '', s)
+	s = re.sub(r"\s+", '-', s)
+	return s
+
 s = requests.session()
 
 
@@ -18,11 +23,7 @@ try:
 except Exception:
 	pass
 
-try:
-	os.remove('paper.md')
-except Exception:
-	pass
-
+filename=urlify(URL.split('/')[6])
 
 ctt_home = s.get(URL).content
 # with open('ctt_home.txt','w') as f:
@@ -45,8 +46,11 @@ with open('results.txt') as f:
 	num_lines = sum(1 for _ in f)
 
 print(str(num_lines)+' items total')
-
 count=0
+
+with open(filename+'.md','w') as f:
+	f.write('`{'+URL+'}`\n\n')
+
 
 with open('results.txt') as file_:
 
@@ -109,17 +113,17 @@ with open('results.txt') as file_:
 		piece=tt+au+ticm+ab+trk
 		# print (piece)
 
-		with open('paper.md','a') as f:
+		with open(filename+'.md','a') as f:
 			f.write(piece)
 
 		count+=1
 		print('writing '+str(count)+'/'+str(num_lines)+'...')
 
-print('paper.md created!')
+print(filename+'.md created!')
 
 os.remove('results.txt')
 
 print('converting...')
-os.system("pandoc " + "paper.md -o paper.pdf --latex-engine=xelatex -V geometry:margin=1.5cm")
+os.system("pandoc "+filename+'.md -o '+filename+'.pdf --latex-engine=xelatex -V geometry:margin=1.5cm')
 
-print('paper.pdf created!')
+print(filename+'.pdf created!')
