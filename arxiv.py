@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 # -*- encoding: utf8 -*-
+# The code is ugly. I will rewite it using bs4 when I have time.
+
 import requests
 import re
 import os
